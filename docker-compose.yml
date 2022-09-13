@@ -1,0 +1,26 @@
+# this creates a WP site that connects to mySQL and also auto creates the network of course
+version: '3.3'
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+    - "80:80"
+    environment:
+    - WORDPRESS_DB_HOST=wp-mysql:3306
+    - WORDPRESS_DB_USER=user 
+    - WORDPRESS_DB_PASSWORD=admin
+    - WORDPRESS_DB_NAME=wp
+    # depends_on:
+    # - mysqldb
+
+  wp-mysql:
+    image: mysql
+    restart: always
+    ports:
+    - "3306:3306"
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=wp 
+    - MYSQL_USER=user 
+    - MYSQL_PASSWORD=admin
